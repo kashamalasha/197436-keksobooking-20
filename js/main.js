@@ -88,7 +88,7 @@ var renderPin = function (obj) {
 var renderPins = function (arr) {
   var fragment = document.createDocumentFragment();
 
-  for (var j = 0; j < offersArray.length; j++) {
+  for (var j = 0; j < arr.length; j++) {
     fragment.appendChild(renderPin(arr[j]));
   }
 
