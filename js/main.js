@@ -199,7 +199,7 @@ var renderOffer = function (obj) {
 
   renderText(offer.querySelector('.popup__type'),
       obj.offer.type,
-      Placement.fromId(obj.offer.type).name);
+      placement.fromId(obj.offer.type).name);
 
   renderText(offer.querySelector('.popup__text--capacity'),
       obj.offer.rooms && obj.offer.guests,
