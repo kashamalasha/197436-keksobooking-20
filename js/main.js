@@ -21,6 +21,24 @@ var PIN_ELEMENT = {
   H: 70
 };
 
+var Placement = {
+  FLAT: {
+    name: 'Квартира'
+  },
+  BUNGALO: {
+    name: 'Бунгало'
+  },
+  HOUSE: {
+    name: 'Дом'
+  },
+  PALACE: {
+    name: 'Дворец'
+  },
+  fromId: function (id) {
+    return this[id.toUpperCase()];
+  }
+};
+
 var mapElement = document.querySelector('.map');
 var mapPins = document.querySelector('.map__pins');
 
@@ -127,23 +145,6 @@ var renderText = function (element, data, text) {
 var renderOffer = function (obj) {
   var offer = offerTemplate.cloneNode(true);
 
-  var placement = {
-    flat: {
-      name: 'Квартира'
-    },
-    bungalo: {
-      name: 'Бунгало'
-    },
-    house: {
-      name: 'Дом'
-    },
-    palace: {
-      name: 'Дворец'
-    },
-    fromId: function (id) {
-      return this[id.toLowerCase()];
-    }
-  };
 
   var features = offer.querySelector('.popup__features');
   removeChildren(features);
@@ -198,7 +199,7 @@ var renderOffer = function (obj) {
 
   renderText(offer.querySelector('.popup__type'),
       obj.offer.type,
-      placement.fromId(obj.offer.type).name);
+      Placement.fromId(obj.offer.type).name);
 
   renderText(offer.querySelector('.popup__text--capacity'),
       obj.offer.rooms && obj.offer.guests,
@@ -222,5 +223,3 @@ mapElement.appendChild(mapPins);
 mapElement.classList.remove('map--faded');
 
 mapElement.insertBefore(renderOffer(offersArray[0]), mapElement.querySelector('.map__filters-container'));
-
-
