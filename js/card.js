@@ -6,12 +6,6 @@
     .content
     .querySelector('.map__card');
 
-  var removeChildren = function (container) {
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
-    }
-  };
-
   var renderText = function (element, data, text) {
     if (data) {
       element.textContent = text;
@@ -20,40 +14,50 @@
     }
   };
 
-  var renderOffer = function (obj) {
-    var offer = offerTemplate.cloneNode(true);
+  var renderFeatures = function (card) {
 
+    var features = card.querySelector('.popup__features');
+    window.domUtil.removeChildren(features);
 
-    var features = offer.querySelector('.popup__features');
-    removeChildren(features);
-
-    if (obj.offer.features) {
-      for (var i = 0; i < obj.offer.features.length; i++) {
+    if (card.features) {
+      for (var i = 0; i < card.features.length; i++) {
         var feature = document.createElement('li');
         feature.classList.add('popup__feature');
-        feature.classList.add('popup__feature--' + obj.offer.features[i]);
+        feature.classList.add('popup__feature--' + card.features[i]);
         features.appendChild(feature);
       }
     } else {
       features.style.display = 'none';
     }
 
-    var photos = offer.querySelector('.popup__photos');
-    removeChildren(photos);
+  };
 
-    if (obj.offer.photos) {
-      for (var j = 0; j < obj.offer.photos.length; j++) {
+  var renderPhotos = function (card) {
+
+    var photos = card.querySelector('.popup__photos');
+    window.domUtil.removeChildren(photos);
+
+    if (card.photos) {
+      for (var j = 0; j < card.photos.length; j++) {
         var photo = document.createElement('img');
         photo.classList.add('popup__photo');
         photo.width = 45;
         photo.height = 40;
         photo.alt = 'Фотография жилья';
-        photo.src = obj.offer.photos[j];
+        photo.src = card.photos[j];
         photos.appendChild(photo);
       }
     } else {
       photos.style.display = 'none';
     }
+
+  };
+
+  var renderOffer = function (obj) {
+    var offer = offerTemplate.cloneNode(true);
+
+    renderFeatures(offer);
+    renderPhotos(offer);
 
     var avatar = offer.querySelector('.popup__avatar');
 
@@ -94,6 +98,8 @@
     return offer;
   };
 
+  window.card = {
+    renderOffer: renderOffer
+  };
 
-  window.map.mapElement.insertBefore(renderOffer(window.data.offersArray[0]), window.map.mapElement.querySelector('.map__filters-container'));
 })();

@@ -2,7 +2,6 @@
 
 (function () {
 
-  var MOCK_QUANTITY = 8;
   var MOCK_TITLES = ['Нора в горе', 'Нора под горой', 'Нора на горе'];
   var MOCK_TYPES = ['palace', 'flat', 'house', 'bungalo'];
   var MOCK_HOURS = ['12:00', '13:00', '14:00'];
@@ -52,10 +51,8 @@
     return arr;
   };
 
-  var offersArray = generateMockPins(MOCK_QUANTITY);
-
   window.data = {
-    offersArray: offersArray
+    generateMockPins: generateMockPins
   };
 
 })();

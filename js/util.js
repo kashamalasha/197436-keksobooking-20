@@ -4,11 +4,9 @@
 
   var Keys = {
     ENTER: {
-      keyCode: 13,
       keyName: 'Enter'
     },
     ESCAPE: {
-      keyCode: 27,
       keyName: 'Escape'
     }
   };
