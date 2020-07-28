@@ -13,7 +13,7 @@
     LOAD: 'https://javascript.pages.academy/keksobooking/data'
   };
 
-  var createRequest = function (method, url, data, onLoad, onError) {
+  var createRequest = function (method, url, onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -38,15 +38,18 @@
 
     xhr.timeout = TIMEOUT;
     xhr.open(method, url);
-    xhr.send(data);
+
+    return xhr;
   };
 
   var load = function (onSuccess, onError) {
-    createRequest('GET', Url.LOAD, null, onSuccess, onError);
+    var xhr = createRequest('GET', Url.LOAD, onSuccess, onError);
+    xhr.send();
   };
 
   var save = function (data, onSuccess, onError) {
-    createRequest('POST', Url.SAVE, data, onSuccess, onError);
+    var xhr = createRequest('POST', Url.SAVE, onSuccess, onError);
+    xhr.send(data);
   };
 
   window.backend = {
